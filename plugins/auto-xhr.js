@@ -854,8 +854,9 @@
 			this.watch--;
 
 			// for SPA events, the resource's URL may be set to the previous navigation's URL.
-			// reset it to the current document URL
-			if (BOOMR.utils.inArray(ev.type, BOOMR.constants.BEACON_TYPE_SPAS)) {
+			// reset it to the current document URL if the route change type is not hashchange or popstate
+			if (BOOMR.utils.inArray(ev.type, BOOMR.constants.BEACON_TYPE_SPAS) &&
+				!BOOMR.utils.inArray(ev.resource.routeChangeType, ["hashchange", "popstate"])) {
 				ev.resource.url = d.URL;
 			}
 
@@ -978,7 +979,7 @@
 				// If the SPA load was aborted, set the rt.quit and rt.abld flags
 				if (typeof eventIndex === "number" && self.pending_events[eventIndex].aborted) {
 					// Save the URL otherwise it might change before we have a chance to put it on the beacon
-					BOOMR.addVar("pgu", d.URL, true);
+					BOOMR.addVar("pgu", resource.url, true);
 					BOOMR.addVar("rt.quit", "", true);
 					BOOMR.addVar("rt.abld", "", true);
 				}

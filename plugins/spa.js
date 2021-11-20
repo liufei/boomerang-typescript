@@ -431,7 +431,9 @@
 					requestStart: requestStart
 				},
 				initiator: initiator,
-				url: url
+				url: url,
+				// save the route change type to update the URL
+				routeChangeType: routeFilterArgs ? routeFilterArgs[0] : ""
 			};
 
 			firstSpaNav = false;
