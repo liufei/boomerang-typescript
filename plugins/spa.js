@@ -422,6 +422,10 @@
 			// it in AutoXHR sendEvent
 			var url = BOOMR.window.document.URL;
 
+			// generate a random page ID for SPA page's lifetime
+			BOOMR.pageId = BOOMR.utils.generateId(8);
+			BOOMR.debug("Generated PageID: " + BOOMR.pageId);
+
 			// `this` is unbound, use BOOMR.plugins.SPA
 			BOOMR.fireEvent("spa_init", [BOOMR.plugins.SPA.current_spa_nav(), url]);
 
